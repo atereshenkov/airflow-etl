@@ -1,0 +1,23 @@
+
+docker run -e export AIRFLOW_CONN_PD_SFDC='http://admin2%40achannabasappa.gpm.pd:modeln%40123@https://login.salesforce.com/services/Soap/u/42.0?security_token=vnEemK098sWnQ0ON45139mZ0i' -v /home/atereshenkov/airflow/requirements.txt:/requirements.txt  -v /home/atereshenkov/airflow/plugins:/usr/local/airflow/plugins -v /home/atereshenkov/airflow/dags:/usr/local/airflow/dags   -p 8080:8080 puckel/docker-airflow webserver
+
+
+docker run -e  AIRFLOW_CONN_PD_SFDC='http://admin2%40achannabasappa.gpm.pd:modeln%40123@https://login.salesforce.com/services/Soap/u/42.0?security_token=vnEemK098sWnQ0ON45139mZ0i'  -v /home/atereshenkov/airflow/requirements.txt:/requirements.txt -v /home/atereshenkov/airflow/plugins:/usr/local/airflow/plugins -v /home/atereshenkov/airflow/dags:/usr/local/airflow/dags --rm -ti puckel/docker-airflow bash
+
+airflow initdb
+mkdir /usr/local/airflow/data/
+airflow run --force extract_sfdc get_model_salesforce 2017-1-24
+
+airflow list_dags
+
+docker stats
+
+
+airflow connections -a --conn_id PD_SFDC2 --conn_extra 'security_token=vnEemK098sWnQ0ON45139mZ0i' --conn_type http --conn_host 'https://login.salesforce.com/services/Soap/u/42.0'  --conn_login admin2@achannabasappa.gpm.pd --conn_password modeln@123
+                   
+
+
+export AIRFLOW_CONN_PD_SFDC='http://admin2%40achannabasappa.gpm.pd:modeln%40123@https://login.salesforce.com/services/Soap/u/42.0?security_token=vnEemK098sWnQ0ON45139mZ0i'
+
+
+https://github.com/puckel/docker-airflow
